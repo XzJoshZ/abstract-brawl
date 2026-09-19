@@ -1,8 +1,8 @@
 /* One pointer owns a set of keys. Sliding changes only the keys that differ. */
 (()=>{
 class FightTouchInput{
- constructor(doc,{getGame,unlock}){
-  this.doc=doc;this.getGame=getGame;this.unlock=unlock;this.pointers=new Map();this.held=new Set();this.cells=new Map();
+ constructor(doc,{getGame,unlock,mapCode}){
+  this.doc=doc;this.getGame=getGame;this.unlock=unlock;this.mapCode=mapCode||null;this.pointers=new Map();this.held=new Set();this.cells=new Map();
   this.buttons=[...doc.querySelectorAll('[data-hold]')];this.pad=doc.getElementById('direction-pad');this.directions=[...doc.querySelectorAll('[data-direction]')];
   for(const button of this.buttons){
    button.addEventListener('pointerdown',e=>{if(e.button!=null&&e.button!==0)return;e.preventDefault();unlock();button.setPointerCapture(e.pointerId);this.update(e.pointerId,button.dataset.hold.split(' '));});
@@ -20,8 +20,9 @@ class FightTouchInput{
  }
  update(id,codes){
   this.pointers.set(id,new Set(codes));const next=new Set([...this.pointers.values()].flatMap(set=>[...set]));
-  for(const code of this.held)if(!next.has(code))this.getGame()?.keyUp(code);
-  for(const code of next)if(!this.held.has(code))this.getGame()?.keyDown(code);
+  const map=code=>this.mapCode?.[code]||code;
+  for(const code of this.held)if(!next.has(code))this.getGame()?.keyUp(map(code));
+  for(const code of next)if(!this.held.has(code))this.getGame()?.keyDown(map(code));
   this.held=next;this.paint();
  }
  move(event){
@@ -40,7 +41,7 @@ class FightTouchInput{
   const direction=[...this.held].filter(c=>['KeyA','KeyD','KeyW','KeyS'].includes(c)).sort().join(' ');
   for(const b of this.directions)b.classList.toggle('held',b.dataset.direction.split(' ').sort().join(' ')===direction);
  }
- reapply(game=this.getGame()){for(const code of this.held)game?.keyDown(code);}
+ reapply(game=this.getGame()){const map=code=>this.mapCode?.[code]||code;for(const code of this.held)game?.keyDown(map(code));}
  releaseAll(){for(const code of this.held)this.getGame()?.keyUp(code);this.pointers.clear();this.cells.clear();this.held.clear();this.paint();}
 }
 window.FightTouchInput=FightTouchInput;

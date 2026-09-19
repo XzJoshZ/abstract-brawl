@@ -1,6 +1,6 @@
 {
   "name": "abstract-brawl",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "private": true,
   "description": "抽象大乱斗：格斗、回合战、自走棋。仅供非商业学习交流。",
   "license": "SEE LICENSE IN LICENSE",
@@ -9,6 +9,8 @@
   },
   "scripts": {
     "dev": "node scripts/serve.mjs",
+    "play": "node scripts/play.mjs",
+    "relay": "node scripts/relay.mjs",
     "check": "node scripts/check.mjs",
     "test": "node scripts/test.mjs",
     "build": "node scripts/build.mjs",

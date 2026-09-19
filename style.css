@@ -109,6 +109,20 @@ img,canvas{-webkit-user-drag:none}
 [data-difficulty="3"]{border-color:#bd80f3;color:#d5a8ff}
 [data-difficulty="3"].active{background:#b878f0;color:#150f1f}
 .team-selection .select-stage{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));height:410px}
+
+/* LAN room panel and connection status line. */
+.net-panel{padding:12px 14px;background:#1d1b28;border:1px solid #484153;margin:0 0 12px}
+.net-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.net-row label{display:flex;gap:8px;align-items:center;font-size:13px;color:#c6c1d1}
+#net-code{width:92px;font-family:ui-monospace,Consolas,monospace;font-size:16px;letter-spacing:4px;text-transform:uppercase;text-align:center;background:#111119;border:1px solid #484153;color:#d8ff62;padding:8px 6px}
+.net-relay-row small{font-size:12px;color:#8f8aa0;line-height:1.5}
+#net-relay{width:230px;font-family:ui-monospace,Consolas,monospace;font-size:12px;background:#111119;border:1px solid #484153;color:#ccc5d9;padding:7px 8px}
+.net-status{display:block;font-size:13px;line-height:1.7;color:#ccc5d9;margin:10px 0 0;min-height:0}
+.net-status.error{color:#ff8ea8}
+#net-status-battle{color:#d8ff62;font-size:12px;line-height:1.4;margin:0 0 2px;text-align:right}
+#net-status-battle.error{color:#ff8ea8}
+#net-status-battle:empty{display:none}
+#net-status:empty{display:none}
 .team-selection .fighter-preview{min-width:0;height:204px;padding:15px 20px;align-items:center;border-bottom:1px solid #ffffff13}
 .team-selection .portrait-wrap{width:140px;height:180px;flex-shrink:0}
 .team-selection .portrait-wrap canvas{transform:none;width:145px;height:175px;bottom:-2px;left:0}
